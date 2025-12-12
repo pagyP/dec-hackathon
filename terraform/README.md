@@ -94,4 +94,12 @@ terraform plan -var='hub_subnets=[{"name":"app","address_prefix":"10.0.1.0/24"},
   3. Apply cautiously in a test subscription: `terraform apply -var 'create_bastion=false'` (use `-auto-approve` if desired).
   4. Verify in Azure Portal or with CLI (e.g., inspect the Private DNS zone and resources in the Resource Group).
 - Tips: keep resource sizes small to limit cost; add tags for tracking; test in a disposable subscription or resource group.
+- If you see PlatformImageNotFound errors (e.g. "Canonical:UbuntuServer:20_04-lts:latest not found"), the requested image SKU may not be available in the region or marketplace. Use the Azure CLI to find valid images for your region:
+
+  ```bash
+  az vm image list --publisher Canonical --offer UbuntuServer --all --output table
+  az vm image show --urn Canonical:UbuntuServer:18.04-LTS:latest
+  ```
+
+  Then override the image in `terraform.tfvars` (see `linux_image` variable) with a SKU available in your region.
 - Docs: see Azure Private DNS Resolver docs for APIs and examples (search "Azure Private DNS Resolver" on docs.microsoft.com).

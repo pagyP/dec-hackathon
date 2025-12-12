@@ -42,7 +42,7 @@ variable "spoke_onprem_vnet_cidr" {
 
 variable "spoke_app_subnets" {
   description = "List of subnets for the app spoke VNet"
-  type = list(object({ name = string, address_prefix = string }))
+  type        = list(object({ name = string, address_prefix = string }))
   default = [
     { name = "app-subnet-1", address_prefix = "10.1.1.0/24" },
     { name = "app-subnet-2", address_prefix = "10.1.2.0/24" },
@@ -51,7 +51,7 @@ variable "spoke_app_subnets" {
 
 variable "spoke_onprem_subnets" {
   description = "List of subnets for the onprem spoke VNet"
-  type = list(object({ name = string, address_prefix = string }))
+  type        = list(object({ name = string, address_prefix = string }))
   default = [
     { name = "onprem-subnet-1", address_prefix = "10.2.1.0/24" },
     { name = "onprem-subnet-2", address_prefix = "10.2.2.0/24" },
@@ -93,8 +93,8 @@ variable "gateway_subnet_cidr" {
 variable "hub_subnets" {
   description = "List of subnets for the hub VNet (see modules/vnet for schema)"
   type = list(object({
-    name           = string
-    address_prefix = string
+    name              = string
+    address_prefix    = string
     service_endpoints = optional(list(string))
   }))
   default = []
@@ -102,8 +102,8 @@ variable "hub_subnets" {
 
 variable "azure_bastion_subnet" {
   description = "Subnet to create for Azure Bastion. Name should be 'AzureBastionSubnet' per Azure requirements."
-  type = object({ name = string, address_prefix = string })
-  default = { name = "AzureBastionSubnet", address_prefix = "10.0.3.0/27" }
+  type        = object({ name = string, address_prefix = string })
+  default     = { name = "AzureBastionSubnet", address_prefix = "10.0.3.0/27" }
 
   validation {
     condition     = var.azure_bastion_subnet.name == "AzureBastionSubnet"
@@ -119,7 +119,7 @@ variable "create_bastion" {
 
 variable "private_dns_resolver_subnets" {
   description = "Two subnets required for Azure Private DNS Resolver; provide a list of two subnet objects"
-  type = list(object({ name = string, address_prefix = string }))
+  type        = list(object({ name = string, address_prefix = string }))
   default = [
     { name = "AzurePrivateDnsResolverSubnet1", address_prefix = "10.0.5.0/28" },
     { name = "AzurePrivateDnsResolverSubnet2", address_prefix = "10.0.6.0/28" },

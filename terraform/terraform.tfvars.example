@@ -2,7 +2,7 @@
 
 prefix = "dec"
 resource_group_name = "dec-hack-rg"
-location = "eastus"
+location = "uksouth"
 create_vpn = false
 
 # Example hub subnets
@@ -13,7 +13,7 @@ hub_subnets = [
 
 # Azure Bastion subnet (name MUST be 'AzureBastionSubnet')
 azure_bastion_subnet = { name = "AzureBastionSubnet", address_prefix = "10.0.3.0/27" }
-create_bastion = false
+create_bastion = true
 
 # Private DNS Resolver requires exactly two subnets
 private_dns_resolver_subnets = [

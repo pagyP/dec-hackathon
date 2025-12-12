@@ -32,10 +32,10 @@ variable "vm_size" {
 
 variable "linux_image" {
   type = object({ publisher = string, offer = string, sku = string, version = string })
-  default = { publisher = "Canonical", offer = "UbuntuServer", sku = "20_04-lts", version = "latest" }
+  default = { publisher = "Canonical", offer = "ubuntu-24_04-lts", sku = "server", version = "latest" }
 }
 
 variable "windows_image" {
   type = object({ publisher = string, offer = string, sku = string, version = string })
-  default = { publisher = "MicrosoftWindowsServer", offer = "WindowsServer", sku = "2019-datacenter", version = "latest" }
+  default = { publisher = "MicrosoftWindowsServer", offer = "WindowsServer", sku = "2022-datacenter", version = "latest" }
 }
