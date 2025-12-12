@@ -1,0 +1,45 @@
+# Example Terraform variables for this repository
+
+prefix = "dec"
+resource_group_name = "dec-hack-rg"
+location = "eastus"
+create_vpn = false
+
+# Example hub subnets
+hub_subnets = [
+  { name = "app", address_prefix = "10.0.1.0/24" },
+  { name = "db",  address_prefix = "10.0.2.0/24" },
+]
+
+# Azure Bastion subnet (name MUST be 'AzureBastionSubnet')
+azure_bastion_subnet = { name = "AzureBastionSubnet", address_prefix = "10.0.3.0/27" }
+create_bastion = false
+
+# Private DNS Resolver requires exactly two subnets
+private_dns_resolver_subnets = [
+  { name = "AzurePrivateDnsResolverSubnet1", address_prefix = "10.0.5.0/28" },
+  { name = "AzurePrivateDnsResolverSubnet2", address_prefix = "10.0.6.0/28" },
+]
+
+# Example spoke subnets
+spoke_app_subnets = [
+  { name = "app-subnet-1", address_prefix = "10.1.1.0/24" },
+  { name = "app-subnet-2", address_prefix = "10.1.2.0/24" },
+]
+
+spoke_onprem_subnets = [
+  { name = "onprem-subnet-1", address_prefix = "10.2.1.0/24" },
+  { name = "onprem-subnet-2", address_prefix = "10.2.2.0/24" },
+]
+
+# Example VM credentials (for testing only)
+# To use SSH key auth for Linux provide a public key, otherwise Linux will use a password
+# linux_ssh_public_key = "ssh-rsa AAA... your key ..."
+# To use username/password for Linux supply a password (recommended for this hackathon):
+# linux_admin_password = "P@ssw0rd!"
+# windows_admin_password = "P@ssw0rd!"
+
+# To enable VPN simulation (can incur Azure costs):
+# create_vpn = true
+# onprem_gateway_ip = "203.0.113.45"
+# vpn_shared_key = "change-me-please"
