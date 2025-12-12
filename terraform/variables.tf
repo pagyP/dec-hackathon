@@ -19,7 +19,7 @@ variable "resource_group_name" {
 variable "location" {
   description = "Azure location"
   type        = string
-  default     = "eastus"
+  default     = "uksouth"
 }
 
 variable "hub_vnet_cidr" {
