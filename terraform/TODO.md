@@ -1,0 +1,5 @@
+- Add code in for dns resolver
+- Decide on dns zone names to use
+- Configure 'on-prem' zones on Windows on-prem VM
+- Add config for dns resolver
+- 
