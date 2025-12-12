@@ -2,4 +2,4 @@
 - Decide on dns zone names to use
 - Configure 'on-prem' zones on Windows on-prem VM
 - Add config for dns resolver
-- 
+- storage account for backend
