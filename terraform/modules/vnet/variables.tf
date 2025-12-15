@@ -36,6 +36,14 @@ variable "subnets" {
     name           = string
     address_prefix = string
     service_endpoints = optional(list(string))
+    # Optional delegations: list of objects with 'name' and 'service_delegation_name'
+    delegations = optional(list(object({
+      name = string
+      service_delegation_name = string
+    })))
   }))
-  default = []
+  default = [
+   
+    
+  ]
 }

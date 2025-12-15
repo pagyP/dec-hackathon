@@ -119,17 +119,58 @@ variable "create_bastion" {
 
 variable "private_dns_resolver_subnets" {
   description = "Two subnets required for Azure Private DNS Resolver; provide a list of two subnet objects"
-  type        = list(object({ name = string, address_prefix = string }))
+  
   default = [
-    { name = "AzurePrivateDnsResolverSubnet1", address_prefix = "10.0.5.0/28" },
-    { name = "AzurePrivateDnsResolverSubnet2", address_prefix = "10.0.6.0/28" },
+    { 
+      name = "AzurePrivateDnsResolverSubnet1"
+      address_prefix = "10.0.5.0/28"
+      service_endpoints = [],
+      delegations = [
+        {
+          name = "dnsResolverDelegation"
+          service_delegation_name = "Microsoft.Network/dnsResolvers"
+        }
+      ]
+     },
+    {
+       name = "AzurePrivateDnsResolverSubnet2",
+        address_prefix = "10.0.6.0/28"
+        service_endpoints = []
+        delegations = [
+          {
+            name = "dnsResolverDelegation"
+            service_delegation_name = "Microsoft.Network/dnsResolvers"
+          }
+        ]
+    }
+  
   ]
-
-  validation {
-    condition     = length(var.private_dns_resolver_subnets) == 2
-    error_message = "You must provide exactly two subnets for the Private DNS Resolver"
   }
-}
+
+
+  
+
+
+  # validation {
+  #   condition     = length(var.private_dns_resolver_subnets) == 2
+  #   error_message = "You must provide exactly two subnets for the Private DNS Resolver"
+  # }
+#}
+
+# variable "subnets" {
+#   description = "List of additional subnets to create in the VNet. Each item should be an object with 'name' and 'address_prefix' and optional 'service_endpoints'"
+#   type = list(object({
+#     name           = string
+#     address_prefix = string
+#     service_endpoints = optional(list(string))
+#     # Optional delegations: list of objects with 'name' and 'service_delegation_name'
+#     delegations = optional(list(object({
+#       name = string
+#       service_delegation_name = string
+#     })))
+#   }))
+#   default = []
+# }
 
 variable "onprem_gateway_ip" {
   description = "Public IP of simulated on-prem VPN device (required if create_vpn=true)"

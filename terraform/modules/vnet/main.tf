@@ -21,4 +21,18 @@ resource "azurerm_subnet" "custom" {
   virtual_network_name = azurerm_virtual_network.this.name
   address_prefixes    = [each.value.address_prefix]
   service_endpoints   = try(each.value.service_endpoints, [])
+
+  # Optional subnet delegations. Some "custom" VNets require delegated subnets,
+  # others do not. This dynamic block creates delegation blocks only when the
+  # `delegations` attribute is provided for the subnet in `var.subnets`.
+  dynamic "delegation" {
+    for_each = each.value.delegations != null ? each.value.delegations : []
+    content {
+      name = delegation.value.name
+
+      service_delegation {
+        name = delegation.value.service_delegation_name
+      }
+    }
+  }
 }
